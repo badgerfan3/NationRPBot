@@ -1,0 +1,8 @@
+{
+  "Ping" : "Use this command to check if we are working correctly!",
+  "Help" : "You know how to use help, dumbass. \"Help I dont know how to use help! I am helpless and stupid Wahhhhhhhhh!\" That is you",
+  "DeleteNation" : "If you @ the person, it will delete their nation from the database.",
+  "DeleteAll" : "If you use this, it will delete the entire database. Be careful, this cannot be reversed!",
+  "CreateNation" : "This will create a brand new nation with default values. Provide the NationName and Flag URL to create the new nation. (EX: $createNation NATIONNAME FLAGURL) and just replace as needed",
+  "Info" : "Provides the full profile of the player's nation. (EX: $info @person) Will return person's nation"
+}
