@@ -8,8 +8,6 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
 import java.awt.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;

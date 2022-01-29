@@ -1,7 +1,6 @@
 package Sql;
 
 import java.sql.*;
-import java.util.List;
 
 public class SQLFunctions {
     Connection conn = null;

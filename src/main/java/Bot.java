@@ -4,8 +4,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
-import java.sql.SQLException;
-
 public class Bot {
     public static void main(String[] args){
         Dotenv dotenv = Dotenv.configure()

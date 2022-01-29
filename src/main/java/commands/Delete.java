@@ -4,7 +4,6 @@ import Sql.SQLFunctions;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.MessageBuilder;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
-import org.javacord.api.entity.user.User;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 

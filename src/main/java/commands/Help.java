@@ -1,7 +1,6 @@
 package commands;
 
 import com.google.gson.Gson;
-import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageBuilder;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
