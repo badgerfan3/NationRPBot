@@ -66,16 +66,17 @@ public class Info implements MessageCreateListener {
                 System.out.println("Attempted to get the Info of USER: " + userString);
             } else if (arg.equalsIgnoreCase(prefix + "info")) {
                 ResultSet results = functions.returnNation(null);
+                boolean resultsF = false;
                 try {
-                    if (results.next()) {
                         while (results.next()) {
+                            resultsF = true;
                             String nationName = results.getString("NATION_NAME");
                             float popScore = results.getFloat("POP_SCORE");
                             int pop = results.getInt("POP");
                             int economy = results.getInt("ECONOMY_SCORE");
                             float stability = results.getFloat("STABILITY");
                             String flagURL = results.getString("FLAG");
-                            userID = results.getInt("ID");
+                            userID = results.getLong("ID");
 
                             new MessageBuilder()
                                     .append("<@!" + userID + ">'s Nation Stats!")
@@ -91,11 +92,11 @@ public class Info implements MessageCreateListener {
                                     .send(event.getChannel());
 
                         }
-                    } else {
-                        event.getChannel().sendMessage("The database is empty! You have no users!");
-                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
+                }
+                if (!resultsF) {
+                    event.getChannel().sendMessage("The database is empty! You have no users!");
                 }
             }
         }

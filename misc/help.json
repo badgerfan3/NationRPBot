@@ -4,5 +4,6 @@
   "DeleteNation" : "If you @ the person, it will delete their nation from the database.",
   "DeleteAll" : "If you use this, it will delete the entire database. Be careful, this cannot be reversed!",
   "CreateNation" : "This will create a brand new nation with default values. Provide the NationName and Flag URL to create the new nation. (EX: $createNation NATIONNAME FLAGURL) and just replace as needed",
-  "Info" : "Provides the full profile of the player's nation. (EX: $info @person) Will return person's nation"
+  "Info" : "Provides the full profile of the player's nation. (EX: $info @person) Will return person's nation",
+  "Change" : "Changes a value of a nation. Use $change @person (ID, NATION_NAME, POP, POP_SCORE, ECONOMY_SCORE, or STABILITY) to change the value. The bot will then ask for the value"
 }

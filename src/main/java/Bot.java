@@ -22,6 +22,7 @@ public class Bot {
                 .addListener(new Info(prefix, sqlFunctions))
                 .addListener(new CreateNation(prefix, sqlFunctions))
                 .addListener(new Delete(prefix, sqlFunctions))
+                .addListener(new ChangeVal(prefix, sqlFunctions))
                 .setToken(token)
                 .login()
                 .join();

@@ -119,4 +119,49 @@ public class SQLFunctions {
 
         return rs;
     }
+
+    public void changeStat(String key, Number ID, String valueIn){
+        PreparedStatement ps;
+        Number value;
+        String sql;
+        try {
+            if (ID != null) {
+                System.out.println("Updating the " + key + " where ID = " + ID);
+                if (key.equalsIgnoreCase("POP") || key.equalsIgnoreCase("ECONOMY_SCORE")) {
+                    sql = "UPDATE GAME SET " + key.toUpperCase() + " = ? WHERE ID = ?";
+                    ps = conn.prepareStatement(sql);
+                    value = Integer.parseInt(valueIn);
+
+                    ps.setInt(1, value.intValue());
+                    ps.setLong(2, ID.longValue());
+                } else if(key.equalsIgnoreCase("POP_SCORE") || key.equalsIgnoreCase("STABILITY")) {
+                    sql = "UPDATE GAME SET " + key.toUpperCase() + " = ? WHERE ID = ?";
+                    ps = conn.prepareStatement(sql);
+                    value = Float.parseFloat(valueIn);
+
+                    ps.setFloat(1,value.floatValue());
+                    ps.setLong(2,ID.longValue());
+                } else if(key.equalsIgnoreCase("NATION_NAME") || key.equalsIgnoreCase("FLAG")){
+                    sql = "UPDATE GAME SET " + key.toUpperCase() + " = ? WHERE ID = ?";
+                    ps = conn.prepareStatement(sql);
+
+                    ps.setString(1,valueIn);
+                    ps.setLong(2,ID.longValue());
+                } else if (key.equalsIgnoreCase("ID")) {
+                    sql = "UPDATE GAME SET " + key.toUpperCase() + " = ? WHERE ID = ?";
+                    ps = conn.prepareStatement(sql);
+                    value = Long.parseLong(valueIn);
+
+                    ps.setLong(1, value.longValue());
+                    ps.setLong(2,ID.longValue());
+                } else {
+                    throw new SQLException("Key not valid");
+                }
+                ps.executeUpdate();
+                conn.commit();
+            }
+        } catch (NumberFormatException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
