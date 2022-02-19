@@ -1,6 +1,7 @@
 package commands;
 
 import com.google.gson.Gson;
+import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.MessageBuilder;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
@@ -16,8 +17,9 @@ import java.util.Scanner;
 
 public class Help implements MessageCreateListener {
     String prefix;
-    public Help(String prefix){
-        this.prefix = prefix;
+    DiscordApi api;
+    public Help(String prefix, DiscordApi api){
+        this.prefix = prefix; this.api = api;
     }
 
     @Override

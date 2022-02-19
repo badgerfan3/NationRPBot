@@ -1,6 +1,7 @@
 package commands;
 
 import Sql.SQLFunctions;
+import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
@@ -62,13 +63,15 @@ public class ChangeVal implements MessageCreateListener {
             } else {
                 val = new StringBuilder(scanner.next());
             }
-            sqlFunctions.changeStat(key, userID, val.toString());
-            event.getChannel().sendMessage("Changed <@!"+userID+">'s " + key + " to " + val);
-            System.out.println("Changed " + userID + " val in table");
-            key = null;
-            userID = null;
-            userString =null;
-            author = null;
+            if(event.getServer().isPresent()) {
+                sqlFunctions.changeStat(key, userID, val.toString(), event.getServer().get().getId());
+                event.getChannel().sendMessage("Changed <@!" + userID + ">'s " + key + " to " + val);
+                System.out.println("Changed " + userID + " val in table");
+                key = null;
+                userID = null;
+                userString = null;
+                author = null;
+            }
         }
     }
 }

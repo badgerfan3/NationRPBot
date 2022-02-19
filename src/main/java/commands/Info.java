@@ -1,6 +1,7 @@
 package commands;
 
 import Sql.SQLFunctions;
+import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.MessageBuilder;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
@@ -14,8 +15,9 @@ import java.util.Scanner;
 public class Info implements MessageCreateListener {
     String prefix;
     SQLFunctions functions;
+    DiscordApi api;
 
-    public Info(String prefix, SQLFunctions functions){this.prefix=prefix; this.functions = functions;}
+    public Info(String prefix, SQLFunctions functions, DiscordApi api){this.prefix=prefix; this.functions = functions; this.api = api;}
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
@@ -35,7 +37,11 @@ public class Info implements MessageCreateListener {
                     System.out.println(userString);
                     try {
                         userID = Long.parseLong(userString);
-                        ResultSet results = functions.returnNation(userID);
+                        ResultSet results = null;
+                        if(event.getServer().isPresent()) {
+                            results = functions.returnNation(userID, event.getServer().get().getId());
+                        }
+                        assert results != null;
                         if (results.next()) {
                             String nationName = results.getString("NATION_NAME");
                             float popScore = results.getFloat("POP_SCORE");
@@ -65,7 +71,7 @@ public class Info implements MessageCreateListener {
                 }
                 System.out.println("Attempted to get the Info of USER: " + userString);
             } else if (arg.equalsIgnoreCase(prefix + "info")) {
-                ResultSet results = functions.returnNation(null);
+                ResultSet results = functions.returnNation(null, event.getServer().get().getId());
                 boolean resultsF = false;
                 try {
                         while (results.next()) {
