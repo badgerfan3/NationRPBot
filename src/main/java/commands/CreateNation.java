@@ -51,6 +51,7 @@ public class CreateNation implements MessageCreateListener {
                             event.getChannel().sendMessage("<@!" + userID + "> already has a nation!");
                         } else if (scanner.hasNext()) {
                             flagURL = scanner.next();
+                            System.out.println("FLAG: " + flagURL);
                             URL url = new URL(flagURL);
                             if (scanner.hasNext()) {
                                 StringBuilder nationName = new StringBuilder();
@@ -82,35 +83,34 @@ public class CreateNation implements MessageCreateListener {
                         e.printStackTrace();
                     } catch (MalformedURLException e) {
                         if(!event.getMessageAttachments().isEmpty()){
+                            System.out.println("Makes with Attatchment");
                             StringBuilder nationName = new StringBuilder(flagURL);
-                            if(scanner.hasNext()){
-                                while(scanner.hasNext()) {
-                                    nationName.append(" ").append(scanner.next());
-                                }
-                                String flagURL = event.getMessageAttachments().get(0).getUrl().toString();
-                                try {
-                                    functions.createNation(userID, nationName.toString(), flagURL, event.getServer().get().getId());
-                                } catch (SQLException ex) {
-                                    ex.printStackTrace();
-                                }
+                            while(scanner.hasNext()) {
+                                nationName.append(" ").append(scanner.next());
+                            }
+                            String flagURL = event.getMessageAttachments().get(0).getUrl().toString();
+                            try {
+                                functions.createNation(userID, nationName.toString(), flagURL, event.getServer().get().getId());
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
 
-                                new MessageBuilder()
-                                        .append("Created a new nation for <@!" + userID + "> !")
-                                        .setEmbed(new EmbedBuilder()
-                                                .setTitle(nationName.toString())
-                                                .setDescription("Starting stats for " + nationName)
-                                                .addInlineField("Population Score:", "0.0")
-                                                .addInlineField("Population:", "15k")
-                                                .addField("Economy Score:", "0")
-                                                .addInlineField("Stability:", "0.0")
-                                                .setImage(flagURL)
-                                                .setColor(Color.ORANGE)
-                                                .setAuthor("The Brain"))
-                                        .send(event.getChannel());
+                            new MessageBuilder()
+                                    .append("Created a new nation for <@!" + userID + "> !")
+                                    .setEmbed(new EmbedBuilder()
+                                            .setTitle(nationName.toString())
+                                            .setDescription("Starting stats for " + nationName)
+                                            .addInlineField("Population Score:", "0.0")
+                                            .addInlineField("Population:", "15k")
+                                            .addField("Economy Score:", "0")
+                                            .addInlineField("Stability:", "0.0")
+                                            .setImage(flagURL)
+                                            .setColor(Color.ORANGE)
+                                            .setAuthor("The Brain"))
+                                    .send(event.getChannel());
                             }
 
 
-                        }
                     }
                 }
             }
